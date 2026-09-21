@@ -29,6 +29,9 @@ export function Reveal({ variant = "3d", delay = 0, className = "", children }: 
     const el = ref.current;
     if (!el) return;
 
+    // Use the snap-container as root so observer works inside the phone frame
+    const scrollRoot = el.closest(".snap-container") as Element | null;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -38,7 +41,11 @@ export function Reveal({ variant = "3d", delay = 0, className = "", children }: 
           }
         });
       },
-      { threshold: 0.01, rootMargin: "60px 0px 40px 0px" }
+      {
+        root: scrollRoot ?? null,
+        threshold: 0.12,
+        rootMargin: "0px 0px -20px 0px",
+      }
     );
 
     observer.observe(el);

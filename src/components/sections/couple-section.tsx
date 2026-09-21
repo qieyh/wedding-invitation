@@ -1,6 +1,7 @@
 import { ChevronDown } from "lucide-react";
 import { Reveal } from "@/components/common/reveal";
 import { SectionHeading } from "@/components/common/section-heading";
+import { JasmineTree } from "@/components/common/jasmine-tree";
 import { COUPLE, PHOTOS } from "@/data/invitation";
 
 function BrideCard() {
@@ -55,7 +56,8 @@ function GroomCard() {
 
 export function CoupleSection() {
   return (
-    <section className="snap-section flex min-h-dvh flex-col items-center justify-center bg-linear-to-b from-[#FAF8F5] to-[#F5ECE2] px-6 pb-10 pt-20">
+    <section className="snap-section relative flex min-h-dvh flex-col items-center justify-center bg-linear-to-b from-[#FAF8F5] to-[#F5ECE2] px-6 pb-10 pt-20 overflow-hidden">
+      <JasmineTree />
       <SectionHeading
         badge="The Happy Couple"
         title="Mempelai Pengantin"

@@ -279,30 +279,30 @@
 /* ---------- SatuMomen Floral Sway Animations ---------- */
 @keyframes wave-left {
   0% {
-    transform: rotate(-2.5deg);
+    transform: rotate(-1deg);
   }
   100% {
-    transform: rotate(3.5deg);
+    transform: rotate(1.5deg);
   }
 }
 
 @keyframes wave-right {
   0% {
-    transform: rotate(-2.5deg);
+    transform: rotate(-1deg);
   }
   100% {
-    transform: rotate(3.5deg);
+    transform: rotate(1.5deg);
   }
 }
 
 .animate-sway-right {
   transform-origin: top left;
-  animation: wave-right 4.5s ease-in-out infinite alternate;
+  animation: wave-right 10s ease-in-out infinite alternate;
 }
 
 .animate-sway-left {
   transform-origin: bottom right;
-  animation: wave-left 4.5s ease-in-out infinite alternate;
+  animation: wave-left 10s ease-in-out infinite alternate;
 }
 
 /* ---------- Cover (Gate / Door split animation) ---------- */

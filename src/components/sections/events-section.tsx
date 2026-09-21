@@ -2,6 +2,7 @@ import { Calendar, Clock, GlassWater, Heart, MapPin, Navigation } from "lucide-r
 import { Reveal } from "@/components/common/reveal";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Countdown } from "@/components/common/countdown";
+import { JasmineTree } from "@/components/common/jasmine-tree";
 import { EVENT } from "@/data/invitation";
 
 function EventDetail({ title, tag, time }: { title: string; tag: string; time: string }) {
@@ -40,7 +41,8 @@ function EventDetail({ title, tag, time }: { title: string; tag: string; time: s
 
 export function EventsSection() {
   return (
-    <section className="snap-section flex min-h-dvh flex-col justify-center bg-linear-to-b from-[#F5ECE2] via-[#FAF8F5] to-[#F3EBE0] px-6 pb-6 pt-20">
+    <section className="snap-section relative flex min-h-dvh flex-col justify-center overflow-hidden bg-linear-to-b from-[#F5ECE2] via-[#FAF8F5] to-[#F3EBE0] px-6 pb-6 pt-20">
+      <JasmineTree />
       <SectionHeading
         badge="Waktu & Tempat"
         title="Rangkaian Acara"

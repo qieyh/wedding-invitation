@@ -1,11 +1,13 @@
 import { Quote } from "lucide-react";
 import { Reveal } from "@/components/common/reveal";
 import { SectionHeading } from "@/components/common/section-heading";
+import { JasmineTree } from "@/components/common/jasmine-tree";
 import { PHOTOS } from "@/data/invitation";
 
 export function GallerySection() {
   return (
-    <section className="snap-section flex min-h-dvh flex-col justify-center bg-nude-50 px-6 pb-8 pt-20">
+    <section className="snap-section relative flex min-h-dvh flex-col justify-center overflow-hidden bg-nude-50 px-6 pb-8 pt-20">
+      <JasmineTree />
       <SectionHeading
         badge="Memories of Love"
         title="Galeri Bahagia"

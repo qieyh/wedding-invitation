@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select";
 import { Reveal } from "@/components/common/reveal";
 import { SectionHeading } from "@/components/common/section-heading";
+import { JasmineTree } from "@/components/common/jasmine-tree";
 import { ClosingSection } from "@/components/sections/closing-section";
 import {
   getSupabase,
@@ -176,7 +177,8 @@ export function RsvpSection() {
   }
 
   return (
-    <section className="snap-section flex min-h-dvh flex-col justify-center bg-linear-to-b from-[#FAF8F5] to-[#F5EEE6] px-6 pb-0 pt-20">
+    <section className="snap-section relative flex min-h-dvh flex-col justify-center overflow-hidden bg-linear-to-b from-[#FAF8F5] to-[#F5EEE6] px-6 pb-0 pt-20">
+      <JasmineTree />
       <SectionHeading
         badge="RSVP & Ucapan"
         title="Konfirmasi Kehadiran"

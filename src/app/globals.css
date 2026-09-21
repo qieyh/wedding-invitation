@@ -1,0 +1,339 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-jakarta);
+  --font-serif: var(--font-playfair);
+  --font-display: var(--font-cormorant);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@theme {
+  --color-nude-50: #faf8f5;
+  --color-nude-100: #f4efea;
+  --color-nude-200: #e8ded4;
+  --color-nude-300: #d5c4b5;
+  --color-nude-700: #756353;
+  --color-nude-800: #4d4036;
+  --color-nude-900: #2c241d;
+  --color-gold-300: #e6c875;
+  --color-gold-400: #d4af37;
+  --color-gold-500: #aa820a;
+  --color-gold-600: #856404;
+  --color-gold-700: #6b4e02;
+  --color-sage: #606c5d;
+}
+
+:root {
+  --background: #faf8f5;
+  --foreground: #4d4036;
+  --card: #ffffff;
+  --card-foreground: #4d4036;
+  --popover: #ffffff;
+  --popover-foreground: #4d4036;
+  --primary: #aa820a;
+  --primary-foreground: #ffffff;
+  --secondary: #f4efea;
+  --secondary-foreground: #2c241d;
+  --muted: #f4efea;
+  --muted-foreground: #756353;
+  --accent: #f4efea;
+  --accent-foreground: #2c241d;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #e8ded4;
+  --input: #e8ded4;
+  --ring: #d4af37;
+  --chart-1: #d4af37;
+  --chart-2: #aa820a;
+  --chart-3: #756353;
+  --chart-4: #606c5d;
+  --chart-5: #e6c875;
+  --radius: 0.75rem;
+  --sidebar: #faf8f5;
+  --sidebar-foreground: #4d4036;
+  --sidebar-primary: #aa820a;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f4efea;
+  --sidebar-accent-foreground: #2c241d;
+  --sidebar-border: #e8ded4;
+  --sidebar-ring: #d4af37;
+}
+
+.dark {
+  --background: #2c241d;
+  --foreground: #f4efea;
+  --card: #3a2f26;
+  --card-foreground: #f4efea;
+  --popover: #3a2f26;
+  --popover-foreground: #f4efea;
+  --primary: #d4af37;
+  --primary-foreground: #2c241d;
+  --secondary: #4d4036;
+  --secondary-foreground: #f4efea;
+  --muted: #4d4036;
+  --muted-foreground: #d5c4b5;
+  --accent: #4d4036;
+  --accent-foreground: #f4efea;
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: #756353;
+  --input: #756353;
+  --ring: #d4af37;
+  --sidebar: #2c241d;
+  --sidebar-foreground: #f4efea;
+  --sidebar-primary: #d4af37;
+  --sidebar-primary-foreground: #2c241d;
+  --sidebar-accent: #4d4036;
+  --sidebar-accent-foreground: #f4efea;
+  --sidebar-border: #756353;
+  --sidebar-ring: #d4af37;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+  }
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* ---------- Container scroll-snap (mobile phone frame) ---------- */
+.snap-container {
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ---------- 3D Reveal (IntersectionObserver) ---------- */
+.reveal-3d {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease-out;
+  will-change: transform, opacity;
+}
+.reveal-3d.active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.reveal-card-left {
+  opacity: 0;
+  transform: translate3d(-24px, 12px, 0);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease-out;
+  will-change: transform, opacity;
+}
+.reveal-card-left.active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.reveal-card-right {
+  opacity: 0;
+  transform: translate3d(24px, 12px, 0);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease-out;
+  will-change: transform, opacity;
+}
+.reveal-card-right.active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale3d(0.94, 0.94, 1) translate3d(0, 16px, 0);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease-out;
+  will-change: transform, opacity;
+}
+.reveal-scale.active {
+  opacity: 1;
+  transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
+}
+
+/* ---------- Animations ---------- */
+@keyframes floatSoft {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(4deg);
+  }
+}
+.animate-float {
+  animation: floatSoft 8s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(212, 175, 55, 0.55);
+  }
+}
+.animate-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmerEffect 2.5s infinite;
+}
+@keyframes shimmerEffect {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+
+/* ---------- SatuMomen Floral Sway Animations ---------- */
+@keyframes wave-left {
+  0% {
+    transform: rotate(-2.5deg);
+  }
+  100% {
+    transform: rotate(3.5deg);
+  }
+}
+
+@keyframes wave-right {
+  0% {
+    transform: rotate(-2.5deg);
+  }
+  100% {
+    transform: rotate(3.5deg);
+  }
+}
+
+.animate-sway-right {
+  transform-origin: top left;
+  animation: wave-right 4.5s ease-in-out infinite alternate;
+}
+
+.animate-sway-left {
+  transform-origin: bottom right;
+  animation: wave-left 4.5s ease-in-out infinite alternate;
+}
+
+/* ---------- Cover (Gate / Door split animation) ---------- */
+.cover-overlay {
+  transition: opacity 0.9s cubic-bezier(0.77, 0, 0.175, 1) 0.5s;
+  will-change: opacity;
+}
+.cover-overlay.opened {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gate-door-left {
+  transition: transform 1.3s cubic-bezier(0.77, 0, 0.175, 1);
+  will-change: transform;
+}
+.gate-door-right {
+  transition: transform 1.3s cubic-bezier(0.77, 0, 0.175, 1);
+  will-change: transform;
+}
+.cover-overlay.opened .gate-door-left {
+  transform: translateX(-102%);
+}
+.cover-overlay.opened .gate-door-right {
+  transform: translateX(102%);
+}
+.cover-center-content {
+  transition: opacity 0.6s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+.cover-overlay.opened .cover-center-content {
+  opacity: 0;
+  transform: scale(0.92);
+}

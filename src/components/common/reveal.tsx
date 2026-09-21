@@ -2,13 +2,16 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-export type RevealVariant = "3d" | "left" | "right" | "scale";
+export type RevealVariant = "3d" | "left" | "right" | "scale" | "flip" | "flipUp" | "flipDown";
 
 const VARIANT_CLASS: Record<RevealVariant, string> = {
   "3d": "reveal-3d",
   left: "reveal-card-left",
   right: "reveal-card-right",
   scale: "reveal-scale",
+  flip: "reveal-flip",
+  flipUp: "reveal-flip-up",
+  flipDown: "reveal-flip-down",
 };
 
 interface RevealProps {

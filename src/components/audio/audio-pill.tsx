@@ -14,11 +14,12 @@ export function AudioPill() {
       aria-label={isPlaying ? "Jeda musik" : "Putar musik"}
     >
       <span
-        className={`flex h-5 w-5 items-center justify-center rounded-full border border-gold-400 text-gold-500 ${
+        className={`relative flex h-5 w-5 items-center justify-center rounded-full border border-gold-400 text-gold-500 ${
           isPlaying ? "animate-spin" : ""
         }`}
         style={{ animationDuration: "4s" }}
       >
+        <span className="animate-spin-slow absolute -inset-1 rounded-full border-[1.5px] border-dashed border-gold-400/70" />
         <Disc3 className="h-3.5 w-3.5" />
       </span>
       <span className="text-[11px] font-medium tracking-wide text-nude-700">

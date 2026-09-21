@@ -18,7 +18,7 @@ export function VersesSection() {
           </span>
         </Reveal>
 
-        <Reveal variant="scale" delay={60} className="mt-3 w-full max-w-88">
+        <Reveal variant="flipUp" delay={60} className="mt-3 w-full max-w-88">
           <div className="rounded-3xl border border-gold-300/40 bg-white/85 px-6 py-8 shadow-lg backdrop-blur-md">
             <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-full border border-gold-300/50 bg-gold-400/20 text-gold-600">
               <BookOpen className="h-5 w-5" />

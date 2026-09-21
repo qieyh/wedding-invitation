@@ -5,6 +5,7 @@ import { AudioProvider } from "@/components/audio/audio-provider";
 import { AudioPill } from "@/components/audio/audio-pill";
 import { BackgroundDecor } from "@/components/common/background-decor";
 import { FloatingNav } from "@/components/common/floating-nav";
+import { Preloader } from "@/components/common/preloader";
 import { CoverScreen } from "@/components/cover/cover-screen";
 import { CoupleSection } from "@/components/sections/couple-section";
 import { VersesSection } from "@/components/sections/verses-section";
@@ -22,6 +23,7 @@ export function Invitation() {
         <div className="relative h-dvh w-full max-w-107.5 overflow-hidden bg-white shadow-xl transition-all sm:h-211 sm:max-h-[92vh] sm:rounded-2xl">
 
           <BackgroundDecor />
+          <Preloader />
           <Suspense fallback={null}>
             <CoverScreen />
           </Suspense>

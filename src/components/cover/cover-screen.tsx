@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { MailOpen, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ParticlesLayer } from "@/components/common/particles";
 import { COUPLE, DEFAULT_GUEST, EVENT, PHOTOS } from "@/data/invitation";
 import { useAudio } from "@/components/audio/audio-provider";
 
@@ -62,6 +63,12 @@ function CoverContent() {
   const searchParams = useSearchParams();
   const { start } = useAudio();
   const [opened, setOpened] = useState(false);
+  const [zoomed, setZoomed] = useState(false);
+
+  useEffect(() => {
+    const id = setTimeout(() => setZoomed(true), 80);
+    return () => clearTimeout(id);
+  }, []);
 
   const rawGuest = searchParams.get("to");
   const guestName = rawGuest
@@ -81,6 +88,8 @@ function CoverContent() {
       }`}
       aria-hidden={opened}
     >
+      <ParticlesLayer />
+
       {/* Left Gate Door with Gold Trim & Corner Flora */}
       <div className="gate-door-left pointer-events-none absolute inset-y-0 left-0 z-10 w-1/2 overflow-hidden border-r border-gold-300/40 bg-linear-to-br from-[#FAF6F0] via-[#F4EDE2] to-[#ECE1D3] shadow-2xl">
         <div className="absolute right-0 top-0 bottom-0 w-0.5 bg-linear-to-b from-transparent via-gold-400 to-transparent opacity-80" />
@@ -113,7 +122,12 @@ function CoverContent() {
         </div>
 
         <div className="my-auto flex flex-col items-center">
-          <div className="relative h-52 w-52 animate-glow rounded-full border border-gold-400/40 p-2">
+          <div
+            className={`zoomo relative h-52 w-52 rounded-full border border-gold-400/40 p-2 ${
+              zoomed ? "active" : ""
+            }`}
+            style={{ animation: "pulseGlow 4s ease-in-out infinite" }}
+          >
             <div className="relative h-full w-full overflow-hidden rounded-full border-2 border-white shadow-xl">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -155,7 +169,7 @@ function CoverContent() {
             type="button"
             onClick={open}
             size="lg"
-            className="relative h-auto w-full overflow-hidden rounded-full bg-linear-to-r from-[#AA820A] via-[#D4AF37] to-[#AA820A] px-6 py-3.5 text-xs font-medium uppercase tracking-widest text-white shadow-lg shadow-gold-500/25 transition-transform hover:from-[#AA820A] hover:via-[#D4AF37] hover:to-[#AA820A] active:scale-95"
+            className="animate-pulse-gold relative h-auto w-full overflow-hidden rounded-full bg-linear-to-r from-[#AA820A] via-[#D4AF37] to-[#AA820A] px-6 py-3.5 text-xs font-medium uppercase tracking-widest text-white shadow-lg shadow-gold-500/25 transition-colors hover:from-[#AA820A] hover:via-[#D4AF37] hover:to-[#AA820A]"
           >
             <span className="pointer-events-none absolute inset-0 shimmer" />
             <span className="flex items-center justify-center gap-2">

@@ -132,7 +132,7 @@ export function GallerySection() {
 
       {selected !== null ? (
         <div
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-nude-900/85 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-60 flex items-center justify-center bg-nude-900/85 p-4 backdrop-blur-sm"
           onClick={() => setSelected(null)}
           role="dialog"
           aria-modal="true"

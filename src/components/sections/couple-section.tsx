@@ -12,7 +12,7 @@ function BrideCard() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt="Jannati Wulandhari"
-            src={PHOTOS.placeholder}
+            src={PHOTOS.photo3}
             className="h-full w-full object-cover"
             loading="lazy"
           />
@@ -44,7 +44,7 @@ function GroomCard() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt="Moch. Jalal Adinegoro"
-            src={PHOTOS.placeholder}
+            src={PHOTOS.photo4}
             className="h-full w-full object-cover"
             loading="lazy"
           />

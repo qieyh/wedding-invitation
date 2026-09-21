@@ -4,8 +4,10 @@ import { Suspense } from "react";
 import { AudioProvider } from "@/components/audio/audio-provider";
 import { AudioPill } from "@/components/audio/audio-pill";
 import { BackgroundDecor } from "@/components/common/background-decor";
+import { FloatingNav } from "@/components/common/floating-nav";
 import { CoverScreen } from "@/components/cover/cover-screen";
 import { CoupleSection } from "@/components/sections/couple-section";
+import { VersesSection } from "@/components/sections/verses-section";
 import { EventsSection } from "@/components/sections/events-section";
 import { GallerySection } from "@/components/sections/gallery-section";
 import { GiftSection } from "@/components/sections/gift-section";
@@ -26,11 +28,13 @@ export function Invitation() {
           <AudioPill />
           <main className="snap-container no-scrollbar h-full w-full bg-white">
             <CoupleSection />
+            <VersesSection />
             <EventsSection />
             <GallerySection />
             <RsvpSection />
             <GiftSection />
           </main>
+          <FloatingNav />
         </div>
       </div>
     </AudioProvider>

@@ -27,6 +27,19 @@ export const EVENT = {
     "Jl. KH. Agus Salim RT/RW 08/01 Dusun Krajan 1 Alasbuluh, Wongsorejo, Banyuwangi",
   mapsUrl: "https://maps.app.goo.gl/DqSzVMSURr9dGtkH7",
   countdownUTC: Date.UTC(2026, 9, 11, 2, 0, 0),
+  saveTheDateUrl:
+    "https://www.google.com/calendar/render?action=TEMPLATE" +
+    "&text=" +
+    encodeURIComponent("The Wedding of Wulan & Adi") +
+    "&dates=20261011T020000Z/20261011T050000Z" +
+    "&details=" +
+    encodeURIComponent(
+      "Akad nikah & resepsi pernikahan Wulan & Adi. Mohon doa restunya."
+    ) +
+    "&location=" +
+    encodeURIComponent(
+      "Jl. KH. Agus Salim RT/RW 08/01 Dusun Krajan 1 Alasbuluh, Wongsorejo, Banyuwangi"
+    ),
 } as const;
 
 export const GIFT_CARDS = [
@@ -44,11 +57,36 @@ export const GIFT_CARDS = [
   },
 ] as const;
 
+export const E_WALLETS = [
+  {
+    bank: "DANA",
+    color: "text-blue-700",
+    holder: "a.n. Jannati Wulandhari",
+    number: "",
+  },
+  {
+    bank: "OVO",
+    color: "text-purple-700",
+    holder: "a.n. Moch. Jalal Adinegoro",
+    number: "",
+  },
+] as const;
+
 export const PHOTOS = {
   photo1: "/photo1.jpg",
   photo2: "/photo2.jpg",
   photo3: "/photo3.jpg",
   photo4: "/photo4.jpg",
+  placeholder: "/photo1.jpg",
+} as const;
+
+export const VERSES = {
+  bismillah: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+  greeting: "Assalamu'alaikum Wr. Wb.",
+  translation:
+    "Dan di antara tanda-tanda (kebesaran-Nya) ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.",
+  source: "QS. Ar-Rum: 21",
+  note: "Dengan memohon rahmat dan ridho Allah Subhanahu Wa Ta'ala, kami akan menyelenggarakan acara pernikahan kami.",
 } as const;
 
 export const AUDIO_SRC = "/wedding-song.mp3";

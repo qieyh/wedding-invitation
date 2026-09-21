@@ -56,7 +56,10 @@ function GroomCard() {
 
 export function CoupleSection() {
   return (
-    <section className="snap-section relative flex min-h-dvh flex-col items-center justify-center bg-linear-to-b from-[#FAF8F5] to-[#F5ECE2] px-6 pb-10 pt-20 overflow-hidden">
+    <section
+      id="couple"
+      className="snap-section relative flex min-h-dvh flex-col items-center justify-center bg-linear-to-b from-[#FAF8F5] to-[#F5ECE2] px-6 pb-10 pt-20 overflow-hidden"
+    >
       <JasmineTree />
       <SectionHeading
         badge="The Happy Couple"

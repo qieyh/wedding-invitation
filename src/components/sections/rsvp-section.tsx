@@ -93,7 +93,17 @@ export function RsvpSection() {
   const [status, setStatus] = useState<WishStatus>("Hadir");
   const [pax, setPax] = useState("1");
   const [message, setMessage] = useState("");
-  const [wishes, setWishes] = useState<Wish[]>(SEED_WISHES);
+  const [wishes, setWishes] = useState<Wish[]>(() => {
+    if (
+      typeof window !== "undefined" &&
+      !isSupabaseConfigured() &&
+      typeof localStorage !== "undefined"
+    ) {
+      const stored = loadStoredWishes();
+      return stored.length > 0 ? [...stored, ...SEED_WISHES] : SEED_WISHES;
+    }
+    return SEED_WISHES;
+  });
   const [submitting, setSubmitting] = useState(false);
 
   const uniqueWishes = useMemo(() => {
@@ -109,10 +119,6 @@ export function RsvpSection() {
     let cancelled = false;
 
     if (!isSupabaseConfigured()) {
-      const stored = loadStoredWishes();
-      if (stored.length > 0) {
-        setWishes([...stored, ...SEED_WISHES]);
-      }
       return;
     }
 
@@ -177,7 +183,10 @@ export function RsvpSection() {
   }
 
   return (
-    <section className="snap-section relative flex min-h-dvh flex-col justify-center overflow-hidden bg-linear-to-b from-[#FAF8F5] to-[#F5EEE6] px-6 pb-0 pt-20">
+    <section
+      id="rsvp"
+      className="snap-section relative flex min-h-dvh flex-col justify-center overflow-hidden bg-linear-to-b from-[#FAF8F5] to-[#F5EEE6] px-6 pb-0 pt-20"
+    >
       <JasmineTree />
       <SectionHeading
         badge="RSVP & Ucapan"

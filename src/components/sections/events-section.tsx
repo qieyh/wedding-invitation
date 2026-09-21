@@ -1,4 +1,4 @@
-import { Calendar, Clock, GlassWater, Heart, MapPin, Navigation } from "lucide-react";
+import { Calendar, CalendarPlus, Clock, GlassWater, Heart, MapPin, Navigation } from "lucide-react";
 import { Reveal } from "@/components/common/reveal";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Countdown } from "@/components/common/countdown";
@@ -41,7 +41,10 @@ function EventDetail({ title, tag, time }: { title: string; tag: string; time: s
 
 export function EventsSection() {
   return (
-    <section className="snap-section relative flex min-h-dvh flex-col justify-center overflow-hidden bg-linear-to-b from-[#F5ECE2] via-[#FAF8F5] to-[#F3EBE0] px-6 pb-6 pt-20">
+    <section
+      id="events"
+      className="snap-section relative flex min-h-dvh flex-col justify-center overflow-hidden bg-linear-to-b from-[#F5ECE2] via-[#FAF8F5] to-[#F3EBE0] px-6 pb-6 pt-20"
+    >
       <JasmineTree />
       <SectionHeading
         badge="Waktu & Tempat"
@@ -69,15 +72,26 @@ export function EventsSection() {
       </Reveal>
 
       <Reveal variant="scale" delay={180}>
-        <a
-          href={EVENT.mapsUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-nude-800 py-3 text-xs font-medium uppercase tracking-wider text-gold-300 shadow-md transition-all hover:bg-nude-900 active:scale-95"
-        >
-          <Navigation className="h-4 w-4 text-gold-400" />
-          Buka Petunjuk Arah (Google Maps)
-        </a>
+        <div className="grid grid-cols-2 gap-2">
+          <a
+            href={EVENT.saveTheDateUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-1.5 rounded-xl bg-gold-400 py-3 text-center text-[11px] font-semibold uppercase tracking-wider text-white shadow-md transition-all hover:bg-gold-500 active:scale-95"
+          >
+            <CalendarPlus className="h-4 w-4 shrink-0" />
+            Save The Date
+          </a>
+          <a
+            href={EVENT.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-1.5 rounded-xl bg-nude-800 py-3 text-center text-[11px] font-semibold uppercase tracking-wider text-gold-300 shadow-md transition-all hover:bg-nude-900 active:scale-95"
+          >
+            <Navigation className="h-4 w-4 shrink-0 text-gold-400" />
+            Lihat Maps
+          </a>
+        </div>
       </Reveal>
     </section>
   );

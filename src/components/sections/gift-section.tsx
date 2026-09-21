@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/common/reveal";
 import { JasmineTree } from "@/components/common/jasmine-tree";
-import { COUPLE, GIFT_CARDS } from "@/data/invitation";
+import { COUPLE, E_WALLETS, GIFT_CARDS } from "@/data/invitation";
 
 async function copyNumber(number: string) {
   try {
@@ -57,7 +57,10 @@ function GiftBankRow({ bank, holder, number, color }: { bank: string; holder: st
 
 export function GiftSection() {
   return (
-    <section className="snap-section relative flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-linear-to-b from-[#F5EEE6] via-[#FAF8F5] to-[#EDE4D8] px-6 pb-10 pt-20 text-center">
+    <section
+      id="gift"
+      className="snap-section relative flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-linear-to-b from-[#F5EEE6] via-[#FAF8F5] to-[#EDE4D8] px-6 pb-10 pt-20 text-center"
+    >
       <JasmineTree />
       <Reveal variant="scale" className="w-full rounded-2xl border border-gold-300/50 bg-white/90 p-4 shadow-md backdrop-blur-md">
         <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-gold-400/20 text-gold-600">
@@ -74,6 +77,16 @@ export function GiftSection() {
           {GIFT_CARDS.map((g) => (
             <GiftBankRow key={g.bank} {...g} />
           ))}
+        </div>
+        <div className="mt-4 border-t border-nude-200/80 pt-3">
+          <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-nude-700">
+            Dompet Digital
+          </p>
+          <div className="space-y-2">
+            {E_WALLETS.map((g) => (
+              <GiftBankRow key={g.bank} {...g} />
+            ))}
+          </div>
         </div>
       </Reveal>
 

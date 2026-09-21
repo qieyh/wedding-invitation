@@ -118,7 +118,7 @@ function CoverContent() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 alt="Mempelai Wulan & Adi"
-                src={PHOTOS.photo1}
+                src={PHOTOS.photo4}
                 className="h-full w-full object-cover brightness-[0.97] transition-transform duration-700 hover:scale-105"
               />
               <div className="absolute inset-0 bg-linear-to-t from-nude-900/40 via-transparent to-transparent" />

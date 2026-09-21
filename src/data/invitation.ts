@@ -45,11 +45,12 @@ export const GIFT_CARDS = [
 ] as const;
 
 export const PHOTOS = {
-  placeholder:
-    "https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg",
+  photo1: "/photo1.jpg",
+  photo2: "/photo2.jpg",
+  photo3: "/photo3.jpg",
+  photo4: "/photo4.jpg",
 } as const;
 
-export const AUDIO_SRC =
-  "https://assets.mixkit.co/music/preview/mixkit-serene-view-443.mp3";
+export const AUDIO_SRC = "/wedding-song.mp3";
 
 export const DEFAULT_GUEST = "Tamu Undangan Istimewa";

@@ -73,11 +73,17 @@ export const E_WALLETS = [
 ] as const;
 
 export const PHOTOS = {
-  photo1: "/photo1.jpg",
-  photo2: "/photo2.jpg",
+  // Gallery photos — hanya dari root public/
+  photo1: "/IMG-20260719-WA0109.jpg.jpeg",
+  photo2: "/IMG-20260719-WA0118.jpg.jpeg",
   photo3: "/photo3.jpg",
   photo4: "/photo4.jpg",
-  placeholder: "/photo1.jpg",
+  placeholder: "/IMG-20260719-WA0109.jpg.jpeg",
+  // Foto mempelai individual (dari folder 2-mempelai)
+  bride: "/2-mempelai/photo1.jpg",
+  groom: "/2-mempelai/photo2.jpg",
+  // Foto bersama (cover & couple section)
+  coupleVintage: "/IMG-20260914-WA0005.jpg.jpeg",
 } as const;
 
 export const VERSES = {

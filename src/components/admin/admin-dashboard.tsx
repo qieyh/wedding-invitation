@@ -9,6 +9,7 @@ import {
   CheckCircle2,
   Clock,
   Download,
+  FileSpreadsheet,
   HelpCircle,
   LayoutGrid,
   LogOut,
@@ -19,6 +20,7 @@ import {
   Users,
   XCircle,
 } from "lucide-react";
+import * as XLSX from "xlsx";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -153,7 +155,47 @@ export function AdminDashboard({ initialWishes, isConfigured }: AdminDashboardPr
     }
   }
 
-  // Export CSV dengan UTF-8 BOM
+  // Export Excel (.xlsx) dengan lebar kolom otomatis agar rapi di Microsoft Excel
+  function handleExportExcel() {
+    if (wishes.length === 0) {
+      toast.info("Belum ada data untuk diexport.");
+      return;
+    }
+
+    // Export Excel (.xlsx) dengan lebar kolom otomatis agar rapi di Microsoft Excel
+    const data = [
+      ["No", "Nama Tamu", "Status Kehadiran", "Jumlah Pax", "Ucapan & Doa", "Waktu Konfirmasi"],
+      ...wishes.map((w, idx) => [
+        idx + 1,
+        w.name,
+        w.status,
+        Number(w.pax) || w.pax,
+        w.message,
+        formatIndonesianDate(w.created_at),
+      ]),
+    ];
+
+    const ws = XLSX.utils.aoa_to_sheet(data);
+
+    // Set lebar kolom otomatis agar tidak terpotong saat dibuka di Excel
+    ws["!cols"] = [
+      { wch: 6 },  // No
+      { wch: 26 }, // Nama Tamu
+      { wch: 18 }, // Status Kehadiran
+      { wch: 12 }, // Jumlah Pax
+      { wch: 48 }, // Ucapan & Doa
+      { wch: 24 }, // Waktu Konfirmasi
+    ];
+
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "RSVP Wulan & Adi");
+
+    const dateStr = new Date().toISOString().slice(0, 10);
+    XLSX.writeFile(wb, `rsvp-wulan-adi-${dateStr}.xlsx`);
+    toast.success("File Excel (.xlsx) berhasil diunduh dengan kolom rapi!");
+  }
+
+  // Export CSV dengan UTF-8 BOM dan kolom nomor urut
   function handleExportCsv() {
     if (wishes.length === 0) {
       toast.info("Belum ada data untuk diexport.");
@@ -162,11 +204,12 @@ export function AdminDashboard({ initialWishes, isConfigured }: AdminDashboardPr
 
     const BOM = "\uFEFF";
     const headers = [
+      "No",
       "Nama",
-      "Status Kehadiran",
-      "Jumlah Pax",
-      "Ucapan & Doa",
-      "Waktu Konfirmasi",
+      "Status",
+      "Pax",
+      "Ucapan",
+      "Waktu",
     ];
 
     const escapeCsv = (val: string | number) => {
@@ -174,7 +217,8 @@ export function AdminDashboard({ initialWishes, isConfigured }: AdminDashboardPr
       return `"${str}"`;
     };
 
-    const rows = wishes.map((w) => [
+    const rows = wishes.map((w, idx) => [
+      escapeCsv(idx + 1),
       escapeCsv(w.name),
       escapeCsv(w.status),
       escapeCsv(w.pax),
@@ -200,7 +244,7 @@ export function AdminDashboard({ initialWishes, isConfigured }: AdminDashboardPr
   }
 
   return (
-    <div className="min-h-dvh bg-[#FAF8F5] pb-16 text-nude-900">
+    <div className="min-h-dvh bg-nude-50 pb-16 text-nude-900">
       {/* Top Navbar */}
       <header className="sticky top-0 z-20 border-b border-nude-200/80 bg-white/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
@@ -235,11 +279,23 @@ export function AdminDashboard({ initialWishes, isConfigured }: AdminDashboardPr
 
             <Button
               size="sm"
+              onClick={handleExportExcel}
+              className="h-8 gap-1 rounded-lg bg-emerald-600 px-2.5 text-xs text-white hover:bg-emerald-700 shadow-xs"
+              title="Export ke Excel (.xlsx) dengan kolom rapi"
+            >
+              <FileSpreadsheet className="h-3.5 w-3.5" />
+              <span>Export Excel</span>
+            </Button>
+
+            <Button
+              variant="outline"
+              size="sm"
               onClick={handleExportCsv}
-              className="h-8 gap-1 rounded-lg bg-gold-500 px-2.5 text-xs text-white hover:bg-gold-600 shadow-xs"
+              className="h-8 gap-1 rounded-lg border-nude-200 px-2 text-xs text-nude-700 hover:bg-nude-100"
+              title="Export ke CSV"
             >
               <Download className="h-3.5 w-3.5" />
-              <span>Export CSV</span>
+              <span className="hidden sm:inline">CSV</span>
             </Button>
 
             <Button
@@ -474,7 +530,7 @@ export function AdminDashboard({ initialWishes, isConfigured }: AdminDashboardPr
         {viewMode === "table" && filteredWishes.length > 0 && (
           <div className="overflow-hidden rounded-2xl border border-nude-200 bg-white shadow-xs">
             <div className="no-scrollbar overflow-x-auto">
-              <table className="w-full min-w-[650px] border-collapse text-left text-xs">
+              <table className="w-full min-w-162.5 border-collapse text-left text-xs">
                 <thead>
                   <tr className="border-b border-nude-200 bg-nude-50/70 text-[11px] font-semibold uppercase tracking-wider text-nude-700">
                     <th className="py-3 pl-4 pr-3">Nama Tamu</th>

@@ -26,3 +26,6 @@ create policy "allow_public_select"
   for select
   to anon, authenticated
   using (true);
+
+-- Index urut terbaru untuk query feed dan admin
+create index if not exists idx_wishes_created_at_desc on public.wishes (created_at desc);

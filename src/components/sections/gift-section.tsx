@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Copy, Gift } from "lucide-react";
+import { Check, Copy, Gift, Wifi } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/common/reveal";
 import { JasmineTree } from "@/components/common/jasmine-tree";
-import { COUPLE, E_WALLETS, GIFT_CARDS } from "@/data/invitation";
+import { BRI_CARD, COUPLE } from "@/data/invitation";
 
 async function copyNumber(number: string) {
   try {
@@ -17,39 +17,108 @@ async function copyNumber(number: string) {
   }
 }
 
-function GiftBankRow({ bank, holder, number, color }: { bank: string; holder: string; number: string; color: string }) {
+function CardChip() {
+  return (
+    <svg
+      viewBox="0 0 40 30"
+      className="h-7 w-9 rounded-sm text-white/80"
+      fill="none"
+      aria-hidden="true"
+    >
+      <rect
+        x="1"
+        y="1"
+        width="38"
+        height="28"
+        rx="4"
+        className="fill-amber-300/90"
+      />
+      <path
+        d="M1 11h38M1 19h38M12 1v28M28 1v28"
+        className="stroke-amber-600/70"
+        strokeWidth="2"
+      />
+      <rect
+        x="7"
+        y="7"
+        width="26"
+        height="16"
+        rx="3"
+        className="stroke-amber-600/50"
+        strokeWidth="1.5"
+      />
+    </svg>
+  );
+}
+
+function BriCard() {
   const [copied, setCopied] = useState(false);
-  const disabled = number.trim() === "";
 
   function handleCopy() {
-    if (disabled) return;
-    copyNumber(number).then((ok) => {
+    copyNumber(BRI_CARD.rawNumber).then((ok) => {
       if (!ok) return;
       setCopied(true);
-      toast.success(`Nomor rekening ${bank} disalin`);
+      toast.success("Nomor rekening BRI disalin");
       setTimeout(() => setCopied(false), 2000);
     });
   }
 
   return (
-    <div className="flex items-center justify-between rounded-xl border border-nude-200 bg-nude-50 p-2.5">
-      <div className="text-left">
-        <span className={`block text-[10px] font-bold ${color}`}>{bank}</span>
-        <span className="block font-mono text-xs font-semibold text-nude-900">
-          {number || "Rekening menyusul"}
-        </span>
-        <span className="block text-[10px] text-nude-700">{holder}</span>
+    <div className="mx-auto w-full max-w-sm">
+      <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-[#0063C1] via-[#004A9A] to-[#002B5C] p-5 text-left text-white shadow-lg shadow-blue-900/30">
+        <div className="pointer-events-none absolute -right-12 -top-14 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
+        <div className="pointer-events-none absolute -bottom-24 left-8 h-44 w-44 rounded-full bg-white/5 blur-3xl" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/30" />
+
+        <div className="relative flex items-start justify-between">
+          <div>
+            <div className="text-[10px] font-semibold uppercase tracking-[0.3em] text-white/70">
+              Bank
+            </div>
+            <div className="mt-0.5 font-serif text-2xl font-bold leading-none tracking-wider">
+              BRI
+            </div>
+          </div>
+          <Wifi className="h-5 w-5 rotate-90 text-white/70" />
+        </div>
+
+        <div className="relative mt-5 flex items-center gap-3">
+          <CardChip />
+          <div className="h-px flex-1 bg-linear-to-r from-white/30 via-white/10 to-transparent" />
+        </div>
+
+        <div className="relative mt-5 font-mono text-lg font-semibold tracking-[0.12em] text-white/95 sm:text-xl">
+          {BRI_CARD.number}
+        </div>
+
+        <div className="relative mt-6 flex items-end justify-between gap-3">
+          <div className="min-w-0">
+            <div className="text-[9px] uppercase tracking-widest text-white/60">
+              Atas Nama
+            </div>
+            <div className="mt-0.5 truncate text-[11px] font-semibold uppercase tracking-wide text-white">
+              {BRI_CARD.holder}
+            </div>
+          </div>
+          <div className="shrink-0 rounded-md bg-white/10 px-2 py-1 text-[9px] font-bold tracking-widest text-white/80">
+            DEBIT
+          </div>
+        </div>
       </div>
+
       <Button
         type="button"
         variant="outline"
-        size="xs"
-        disabled={disabled}
+        size="sm"
         onClick={handleCopy}
-        className="gap-1 border-gold-300 bg-white text-sm text-gold-700 transition-transform active:scale-95"
+        className="mt-4 w-full gap-1.5 border-gold-300 bg-white text-sm text-gold-700 transition-transform active:scale-95"
       >
-        {copied ? <Check className="h-3 w-3 text-emerald-600" /> : <Copy className="h-3 w-3" />}
-        {copied ? "Tersalin!" : "Salin"}
+        {copied ? (
+          <Check className="h-4 w-4 text-emerald-600" />
+        ) : (
+          <Copy className="h-4 w-4" />
+        )}
+        {copied ? "Nomor tersalin!" : "Salin Nomor Rekening"}
       </Button>
     </div>
   );
@@ -69,25 +138,11 @@ export function GiftSection() {
         <h3 className="font-serif text-sm font-bold text-nude-900">
           Kado Digital (Tanda Kasih)
         </h3>
-        <p className="mb-3 mt-1 text-[11px] text-nude-700">
+        <p className="mb-4 mt-1 text-[11px] text-nude-700">
           Bagi keluarga dan sahabat yang ingin memberikan tanda kasih secara
           cashless:
         </p>
-        <div className="space-y-2">
-          {GIFT_CARDS.map((g) => (
-            <GiftBankRow key={g.bank} {...g} />
-          ))}
-        </div>
-        <div className="mt-4 border-t border-nude-200/80 pt-3">
-          <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-nude-700">
-            Dompet Digital
-          </p>
-          <div className="space-y-2">
-            {E_WALLETS.map((g) => (
-              <GiftBankRow key={g.bank} {...g} />
-            ))}
-          </div>
-        </div>
+        <BriCard />
       </Reveal>
 
       <Reveal variant="3d" className="mt-12">

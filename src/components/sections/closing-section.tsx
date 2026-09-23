@@ -1,7 +1,6 @@
 "use client";
 
 import { Reveal } from "@/components/common/reveal";
-import { COUPLE } from "@/data/invitation";
 
 export function ClosingSection() {
   return (

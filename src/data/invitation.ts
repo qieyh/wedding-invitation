@@ -42,35 +42,12 @@ export const EVENT = {
     ),
 } as const;
 
-export const GIFT_CARDS = [
-  {
-    bank: "BCA Digital",
-    color: "text-blue-800",
-    holder: "a.n. Jannati Wulandhari",
-    number: "",
-  },
-  {
-    bank: "Bank Mandiri",
-    color: "text-emerald-800",
-    holder: "a.n. Moch. Jalal Adinegoro",
-    number: "",
-  },
-] as const;
-
-export const E_WALLETS = [
-  {
-    bank: "DANA",
-    color: "text-blue-700",
-    holder: "a.n. Jannati Wulandhari",
-    number: "",
-  },
-  {
-    bank: "OVO",
-    color: "text-purple-700",
-    holder: "a.n. Moch. Jalal Adinegoro",
-    number: "",
-  },
-] as const;
+export const BRI_CARD = {
+  bank: "BRI",
+  number: "0021 0103 8506 539",
+  rawNumber: "002101038506539",
+  holder: "Moch. Jalal Adinegoro",
+} as const;
 
 export const PHOTOS = {
   // Gallery photos — hanya dari root public/

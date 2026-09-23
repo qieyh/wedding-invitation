@@ -93,17 +93,8 @@ export function RsvpSection() {
   const [status, setStatus] = useState<WishStatus>("Hadir");
   const [pax, setPax] = useState("1");
   const [message, setMessage] = useState("");
-  const [wishes, setWishes] = useState<Wish[]>(() => {
-    if (
-      typeof window !== "undefined" &&
-      !isSupabaseConfigured() &&
-      typeof localStorage !== "undefined"
-    ) {
-      const stored = loadStoredWishes();
-      return stored.length > 0 ? [...stored, ...SEED_WISHES] : SEED_WISHES;
-    }
-    return SEED_WISHES;
-  });
+  // SSR-safe: selalu mulai dari SEED_WISHES agar server & client match
+  const [wishes, setWishes] = useState<Wish[]>(SEED_WISHES);
   const [submitting, setSubmitting] = useState(false);
 
   const uniqueWishes = useMemo(() => {
@@ -115,10 +106,20 @@ export function RsvpSection() {
     });
   }, [wishes]);
 
+  // Setelah mount: load localStorage (non-Supabase) atau fetch Supabase
   useEffect(() => {
     let cancelled = false;
 
     if (!isSupabaseConfigured()) {
+      // Load dari localStorage setelah hydration selesai
+      const stored = loadStoredWishes();
+      if (stored.length > 0) {
+        queueMicrotask(() => {
+          if (!cancelled) {
+            setWishes([...stored, ...SEED_WISHES]);
+          }
+        });
+      }
       return;
     }
 
